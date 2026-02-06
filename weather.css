@@ -2,7 +2,7 @@ body{
     background-color: #eceaea;
     padding-left: 200px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     padding-top: 200px;
     align-items: center;
     justify-content: center;
@@ -16,12 +16,15 @@ body{
 }
 .select{
     z-index: 1;
-    margin-top: 20px;
+    margin-top: 65px;
+    margin-left: -190px;
+    height: 200px;
     width: 150px;
-    list-style-type: none;
+    overflow-y: scroll;
+    list-style-type: none; 
+    background-color: rgb(18, 199, 81) ;
 }
 .select li{
-    background-color: white;
     border: 1px solid black;
     margin-left: -40px;
     font-weight: 600;
@@ -29,77 +32,127 @@ body{
 }
 .state{
     z-index: 1;
-    margin-top: 20px;
+    margin-top: 65px;
+    margin-left: -190px;
+    height: 200px;
     width: 150px;
-    list-style-type: none;
+    overflow-y: auto;
+    list-style-type: none; 
+    background-color: rgb(18, 199, 81) ;
 }
 .state p{
-   color: red;
+    font-weight: 700;
+   color: black;
    font-size: 12px;
-   margin-top: -15px;
-   margin-left: -20px;
 }
 .state li{
-    background-color: white;
     border: 1px solid black;
     margin-left: -40px;
     font-weight: 600;
     font-family: sans-serif;
 }
 .city{
-    z-index: 1;
-    margin-top: 20px;
+   z-index: 1;
+    margin-top: 65px;
+    margin-left: -190px;
+    height: 200px;
     width: 150px;
-    list-style-type: none;
+    overflow-y: auto;
+    list-style-type: none; 
+    background-color: rgb(18, 199, 81) ;
 }
 .city p{
-    color: red;
+     font-weight: 700;
+   color: black;
    font-size: 12px;
-   margin-top: -15px;
-   margin-left: -20px;
 }
 .city li{
-    background-color: white;
     border: 1px solid black;
     margin-left: -40px;
     font-weight: 600;
     font-family: sans-serif;
 }
 .weather{
-    width: 200px;
-    height: 200px;
+    width: 400px;
+    height: 500px;
     margin-left: 20px;
+background: #022a4f;
+background: linear-gradient(180deg,rgba(2, 42, 79, 1) 50%, rgba(79, 196, 120, 1) 100%);
+}
+.weather2{
+    width: 400px;
+    height: 500px;
+    margin-left: 20px;
+background: #022a4f;
+background: linear-gradient(180deg,rgba(2, 42, 79, 1) 50%, rgba(79, 196, 120, 1) 100%);
 }
 .weather p{
-    font-size: 29px;
-   font-weight: 600;
-margin-top: -62px;
-margin-left: 120px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+    font-size: 70px;
+   font-weight: 10;
+margin-top: -5px;
+margin-left: 190px;
 }
-.weather h1{
-  margin-top: -120px;
+.weather sup{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+   position: absolute;
+   margin-top: -5px;
+    font-size: 35px;
 }
-.weather img{
-    margin-left: 10px;
-    margin-top: 60px;
+.weather .h{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 10;
+    font-size: 25px;
+    color: white;
+  text-transform: capitalize; 
+  margin-top: -5px;
+  margin-left: 130px;
+}
+.weather #img{
+    margin-top: 120px;
     width: 100px;
     height: 100px;
+    margin-left: 160px;
 }
 
 .choose{
     display: flex;
     justify-content: space-between;
-    gap: 30px;
+    gap: 10px;
+  width: 600px;
+height: 500px;
+background: #022a4f;
+background: linear-gradient(180deg,rgba(2, 42, 79, 1) 50%, rgba(79, 196, 120, 1) 100%);
 }
 
 .choose button{
 width: 175px;
-background-color: white;
+margin-top: 10px;
+background-color:rgb(18, 199, 81);
 font-weight: 600;
 font-family: sans-serif;
 font-size: 20px;
 height: 52px;
 }
 .choose button:hover{
+    margin-top: 5px;
+box-shadow: 1px 1px 10px 1px white;
+}
 
+.day{
+    margin-top: -190px;
+    position: absolute;
+     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 10;
+    font-size: 30px;
+    color: white;
+  text-transform: capitalize; 
+  margin-left: 125px;
+}
+
+.page{
+    margin-top: 400px;
+    margin-left: -220px;
 }

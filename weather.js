@@ -1,6 +1,12 @@
 
 let country = 'https://restcountries.com/v3.1/all?fields=name,flags'
+const img = document.querySelector('.img')
 const weather = document.querySelector('.weather')
+const weather2 = document.querySelector('.weather2')
+const f = document.querySelector('.d')
+const page = document.querySelector('.page')
+const page1 = document.querySelector('#page1')
+const page2 = document.querySelector('#page2')
 const h = document.querySelector('#h')
 const p = document.querySelector('#p')
 const select = document.querySelector('.select')
@@ -9,6 +15,33 @@ const btn = document.querySelector('.states')
 const States = document.querySelector('.state')
 const btncity = document.querySelector('.btncity')
 const city = document.querySelector('.city')
+
+const Datee = new Date()
+let day = [
+  '',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+  'Sunday',
+]
+let month = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+]
+
 btncity.addEventListener('click', () =>{
     if(city.className === 'city none'){
       city.className = 'city block'
@@ -18,12 +51,17 @@ btncity.addEventListener('click', () =>{
     if(div.textContent === 'Cilck to choose country'){
       
     }
-    weather.innerHTML = ''
     if(city.innerHTML === '' && btn.textContent === 'Cilck to choose state'){
       city.innerHTML = '<p>Please Choose State First</p>'
     }
      if(city.innerHTML === '' && div.textContent !== 'Cilck to choose state'){
       city.innerHTML = '<p>Please Wait For Content To Appear</p>'
+    }
+    if(select.className === 'select block'){
+      select.className = 'select none'
+    }
+     if(States.className === 'state block'){
+      States.className = 'state none'
     }
 })
 btn.addEventListener('click', () =>{
@@ -32,20 +70,17 @@ btn.addEventListener('click', () =>{
     } else{
         States.className = 'state none'
     }
-    
-    
-    btncity.textContent = 'Cilck to choose city'
-    weather.innerHTML = '' 
-    city.innerHTML = ''
-    localStorage.setItem('btncity', btncity.textContent)
-    localStorage.setItem('weather', weather.innerHTML)
-    localStorage.setItem('city', city.innerHTML)
- 
     if(States.innerHTML === '' && div.textContent === 'Cilck to choose country'){
       States.innerHTML = '<p>Please Choose Country First</p>'
     }
      if(States.innerHTML === '' && div.textContent !== 'Cilck to choose country'){
       States.innerHTML = '<p>Please Wait For Content To Appear</p>'
+    }
+    if(select.className === 'select block'){
+      select.className = 'select none'
+    }
+     if(city.className === 'city block'){
+      city.className = 'city none'
     }
 })
 div.addEventListener('click', () =>{
@@ -54,24 +89,12 @@ div.addEventListener('click', () =>{
     } else{
         select.className = 'select none'
     }
-   
-      btn.textContent = 'Cilck to choose state'
-    btncity.textContent = 'Cilck to choose city'
-    weather.innerHTML = '' 
-    States.innerHTML = ''
-    city.innerHTML = ''
-    localStorage.setItem('btncity', btncity.textContent)
-    localStorage.setItem('weather', weather.innerHTML)
-    localStorage.setItem('btn', btn.textContent)
-    localStorage.setItem('States', States.innerHTML)
-    localStorage.setItem('city', city.innerHTML)
-
-   
-    
-   
-    
-    States.className = 'state none'
-    city.className = 'city none'
+   if(city.className === 'city block'){
+      city.className = 'city none'
+    }
+     if(States.className === 'state block'){
+      States.className = 'state none'
+    }
 })
 let a 
 let d
@@ -126,6 +149,18 @@ if(e.target === select){
   select.className = 'select none'
   let namee = `https://restcountries.com/v3.1/name/${div.textContent}`
   GetAlt(namee)
+   if(div.textContent !== localStorage.getItem('div')){
+      localStorage.setItem('btncity', '')
+    localStorage.setItem('weather', '')
+    localStorage.setItem('btn','' )
+    localStorage.setItem('States', '')
+    localStorage.setItem('city', '')
+    States.innerHTML = ''
+    city.innerHTML = '' 
+    btn.textContent = 'Cilck to choose state'
+    btncity.textContent = 'Cilck to choose city'
+    weather.innerHTML = '' 
+    }
   localStorage.setItem('div', div.textContent)
 }
 })
@@ -163,9 +198,15 @@ if(e.target === States){
     b = Number(e.target.className)
     let api = `${a}${d[b].iso2}/cities`
     getCities(api)
-    if(localStorage.getItem('btn') !== btn.textContent){
-      city.innerHTML = ''
+    if(btn.textContent !== localStorage.getItem('btn')){
+      btncity.textContent = 'Cilck to choose city'
+    weather.innerHTML = '' 
+    city.innerHTML = ''
+    localStorage.setItem('btncity', btncity.textContent)
+    localStorage.setItem('weather', weather.innerHTML)
+    localStorage.setItem('city', city.innerHTML)
     }
+
     localStorage.setItem('btn', btn.textContent)
 }
 })
@@ -187,6 +228,10 @@ if(e.target === city){
     }
     let WHY = `https://api.openweathermap.org/data/2.5/weather?q=${text}&units=metric&appid=96b947a45d33d7dc1c49af3203966408`
     getData(WHY)
+    if(btncity.textContent !== localStorage.getItem('btncity')){
+      weather.innerHTML = ''
+      localStorage.setItem('weather', '')
+    }
     localStorage.setItem('btncity', btncity.textContent)
 }
 })
@@ -196,13 +241,34 @@ btncity.textContent = localStorage.getItem('btncity')
  const getData = async (data) =>{
     const respones = await fetch(data)
     const info =  await respones.json()
-    weather.innerHTML = `<img src="https://openweathermap.org/img/wn/${info.weather[0].icon}@2x.png" alt="" id="img" >` 
-    weather.innerHTML += `<h1>${info.weather[0].main}</h1>`
-    weather.innerHTML += `<p>${Math.round(info.main.temp)}C<sup>o</sup></p>`
-    localStorage.setItem('weather', weather.innerHTML)
+    console.log(info)
+    switch(info.weather[0].main){
+  case "Clear":
+    if(info.weather[0].icon.includes = 'n'){
+     weather.innerHTML = `<img src="./moon.png" alt="" id="img" >`
+    }else{
+      weather.innerHTML = `<img src="./sun.png" alt="" id="img" >`
+    }
+    break
+  case "Clouds":
+    weather.innerHTML = `<img src="./cloud.png" alt="" id="img" >`
+    break  
+  case "Rain":
+    weather.innerHTML = `<img src="./rain.png" alt="" id="img" >`
+    break
+  case "Thunderstorm":
+    weather.innerHTML = `<img src="./thunder.png" alt="" id="img" >`
+    break 
+  case "Snow":
+    weather.innerHTML = `<img src="./snow.png" alt="" id="img" >`
+    break
+    }
+    weather.innerHTML += `<h1 class = 'h'>${info.weather[0].description}</h1>`
+    weather.innerHTML += `<p>${Math.round(info.main.temp)}<sup>o</sup></p>`
+    localStorage.setItem('weather', weather.innerHTML) 
  }
 if(localStorage.getItem('weather')){
-  weather.innerHTML = localStorage.getItem('weather')
+  weather.innerHTML += localStorage.getItem('weather')
 }
 
 let son = 0
@@ -224,3 +290,33 @@ let son2 = 0
    }
  }
 names(country)
+f.innerHTML = `<h1 class = 'day'>${day[Datee.getDay()]}, ${month[Datee.getMonth()]} ${Datee.getDate()}</h1>`
+
+
+
+page.addEventListener('click', (e) =>{
+if(e.target.className === 'page1'){
+  console.log(1)
+  weather.className = 'weather block'
+  weather2.className = 'weather2 none'
+}
+if(e.target.className === 'page2'){
+  console.log(2)
+weather.className = 'weather none'
+weather2.className = 'weather2 block'
+}
+if(weather.className === 'weather none'){
+page.firstElementChild.checked = false
+page.lastElementChild.checked = true
+}
+if(weather2.className === 'weather2 none'){
+page.firstElementChild.checked = true
+page.lastElementChild.checked = false
+}
+})
+
+
+
+
+
+
