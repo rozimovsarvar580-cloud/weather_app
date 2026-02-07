@@ -160,6 +160,7 @@ if(e.target === select){
     btn.textContent = 'Cilck to choose state'
     btncity.textContent = 'Cilck to choose city'
     weather.innerHTML = '' 
+    weather2.innerHTML = ''
     }
   localStorage.setItem('div', div.textContent)
 }
@@ -201,6 +202,7 @@ if(e.target === States){
     if(btn.textContent !== localStorage.getItem('btn')){
       btncity.textContent = 'Cilck to choose city'
     weather.innerHTML = '' 
+     weather2.innerHTML = '' 
     city.innerHTML = ''
     localStorage.setItem('btncity', btncity.textContent)
     localStorage.setItem('weather', weather.innerHTML)
@@ -230,6 +232,7 @@ if(e.target === city){
     getData(WHY)
     if(btncity.textContent !== localStorage.getItem('btncity')){
       weather.innerHTML = ''
+      weather2.innerHTML = ''
       localStorage.setItem('weather', '')
     }
     localStorage.setItem('btncity', btncity.textContent)
@@ -263,12 +266,22 @@ btncity.textContent = localStorage.getItem('btncity')
     weather.innerHTML = `<img src="./snow.png" alt="" id="img" >`
     break
     }
+    weather2.innerHTML = '<p class="wind">Wind</p>'
+    weather2.innerHTML += `<p class="speed">${Math.round(info.wind.speed)}m/s</p>`
+    weather2.innerHTML += '<p class="humidity">Humidity</p>'
+    weather2.innerHTML += ` <p class="Hum">${info.main.humidity}%</p>`
+    weather2.innerHTML += ' <p class="pressure">Pressure</p>'
+    weather2.innerHTML += `<p class="pres">${info.main.pressure}mb</p>`
+    localStorage.setItem('weather2', weather2.innerHTML)
     weather.innerHTML += `<h1 class = 'h'>${info.weather[0].description}</h1>`
     weather.innerHTML += `<p>${Math.round(info.main.temp)}<sup>o</sup></p>`
     localStorage.setItem('weather', weather.innerHTML) 
  }
 if(localStorage.getItem('weather')){
   weather.innerHTML += localStorage.getItem('weather')
+}
+if(localStorage.getItem('weather2')){
+  weather2.innerHTML += localStorage.getItem('weather2')
 }
 
 let son = 0
@@ -291,31 +304,76 @@ let son2 = 0
  }
 names(country)
 f.innerHTML = `<h1 class = 'day'>${day[Datee.getDay()]}, ${month[Datee.getMonth()]} ${Datee.getDate()}</h1>`
-
-
+const Day = document.querySelector('.day')
 
 page.addEventListener('click', (e) =>{
 if(e.target.className === 'page1'){
-  console.log(1)
   weather.className = 'weather block'
   weather2.className = 'weather2 none'
+  Day.className = 'day pg1'
+  localStorage.setItem('Day' , Day.className)
+localStorage.setItem('weather22' , weather2.className)
+localStorage.setItem('weatherr' , weather.className)
 }
 if(e.target.className === 'page2'){
-  console.log(2)
 weather.className = 'weather none'
 weather2.className = 'weather2 block'
+ Day.className = 'day pg2'
+ localStorage.setItem('Day' , Day.className)
+localStorage.setItem('weather22' , weather2.className)
+localStorage.setItem('weatherr' , weather.className)
 }
 if(weather.className === 'weather none'){
 page.firstElementChild.checked = false
 page.lastElementChild.checked = true
+localStorage.setItem('page2',true)
+localStorage.setItem('page1',false)
 }
 if(weather2.className === 'weather2 none'){
 page.firstElementChild.checked = true
 page.lastElementChild.checked = false
+localStorage.setItem('page1',true)
+localStorage.setItem('page2',false)
 }
 })
 
-
+window.addEventListener('keydown',(e) =>{
+  if(e.key === 'ArrowLeft'){
+    weather.className = 'weather block'
+  weather2.className = 'weather2 none'
+  Day.className = 'day pg1'
+  localStorage.setItem('Day' , Day.className)
+localStorage.setItem('weather22' , weather2.className)
+localStorage.setItem('weatherr' , weather.className)
+  }
+  if(e.key === 'ArrowRight'){
+   weather.className = 'weather none'
+weather2.className = 'weather2 block'
+ Day.className = 'day pg2'
+ localStorage.setItem('Day' , Day.className)
+localStorage.setItem('weather22' , weather2.className)
+localStorage.setItem('weatherr' , weather.className)
+  }
+  if(weather.className === 'weather none'){
+page.firstElementChild.checked = false
+page.lastElementChild.checked = true
+localStorage.setItem('page2',true)
+localStorage.setItem('page1',false)
+}
+if(weather2.className === 'weather2 none'){
+page.firstElementChild.checked = true
+page.lastElementChild.checked = false
+localStorage.setItem('page1',true)
+localStorage.setItem('page2',false)
+}
+})
+Day.className = localStorage.getItem('Day')
+weather.className = localStorage.getItem('weatherr')
+weather2.className = localStorage.getItem('weather22')
+let pg1 = localStorage.getItem('page1')
+let pg2 = localStorage.getItem('page2')
+page.firstElementChild.checked = JSON.parse(pg1)
+page.lastElementChild.checked = JSON.parse(pg2)
 
 
 
