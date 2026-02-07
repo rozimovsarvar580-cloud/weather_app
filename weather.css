@@ -73,13 +73,13 @@ body{
     font-family: sans-serif;
 }
 .weather{
-    margin-top: -390px;
+    margin-top: -400px;
     width: 400px;
     height: 500px;
     margin-left: 90px;
 }
 .weather2{
-    margin-top: -390px;
+    margin-top: -400px;
     width: 400px;
     height: 500px;
     margin-left: 90px;
@@ -162,8 +162,8 @@ box-shadow: 1px 1px 10px 1px white;
  margin-left: 150px;
 }
 .page{
-    margin-top: -140px;
-    margin-left: 281px;
+    margin-top: -130px;
+    margin-left: 280px;
 }
 
 .weather2 .speed{
